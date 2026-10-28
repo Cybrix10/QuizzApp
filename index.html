@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Content-Security-Policy: erlaubt nur eigene Dateien sowie die beiden CDNs für Schrift und Icons.
-         Ohne diese Zeile zeigt Electron in der Konsole eine Sicherheitswarnung. -->
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; script-src 'self'">
     <title>bib Quiz</title>
@@ -12,6 +10,7 @@
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
+    <!-- Der Header steht einmal außerhalb der Ansichten und bleibt auf jeder Seite sichtbar. -->
     <header class="header">
         <h1 class="brand">bib Quiz</h1>
         <div class="profile">
@@ -24,47 +23,86 @@
     </header>
 
     <main class="container">
-        <h2 id="greeting">Hallo</h2>
 
-        <!-- Alle Karten teilen sich die Klasse "card". Welche Funktion gemeint ist, steht in data-action,
-             das kann renderer.js beim Klick auslesen (event.currentTarget.dataset.action). -->
-        <section class="cards" aria-label="Spielmodi und Funktionen">
-            <a href="#" class="card" data-action="einzelquiz">
-                <h3>Einzelquiz</h3>
-                <p>12 Fragen aus Ihren Kategorien</p>
-            </a>
-            <a href="#" class="card" data-action="duell">
-                <h3>Duell <span class="badge" id="duell-badge" hidden>1 am Zug</span></h3>
-                <p>Fordern Sie andere Teilnehmer heraus</p>
-            </a>
-            <a href="#" class="card" data-action="rangliste">
-                <h3>Rangliste</h3>
-                <p id="rank"></p>
-            </a>
-            <a href="#" class="card" data-action="profil">
-                <h3>Profil und Statistik</h3>
-                <p>Abzeichen und Lernfortschritt</p>
-            </a>
-            <a href="#" class="card" data-action="einstellungen">
-                <h3>Einstellungen</h3>
-                <p>Fragenanzahl, Zeit, Darstellung</p>
-            </a>
-            <a href="#" class="card" data-action="training">
-                <h3>Training</h3>
-                <p>Ohne Zeitlimit, ohne Ranglistenpunkte</p>
-            </a>
+        <!-- ANSICHT 1: Hauptmenü (am Anfang sichtbar). -->
+        <section class="view" id="view-menue">
+            <h2 id="greeting">Hallo</h2>
+
+            <div class="cards">
+                <a href="#" class="card" data-action="einzelquiz">
+                    <h3>Einzelquiz</h3>
+                    <p>12 Fragen aus Ihren Kategorien</p>
+                </a>
+                <a href="#" class="card" data-action="duell">
+                    <h3>Duell <span class="badge" id="duell-badge" hidden>1 am Zug</span></h3>
+                    <p>Fordern Sie andere Teilnehmer heraus</p>
+                </a>
+                <a href="#" class="card" data-action="rangliste">
+                    <h3>Rangliste</h3>
+                    <p id="rank"></p>
+                </a>
+                <a href="#" class="card" data-action="profil">
+                    <h3>Profil und Statistik</h3>
+                    <p>Abzeichen und Lernfortschritt</p>
+                </a>
+                <a href="#" class="card" data-action="einstellungen">
+                    <h3>Einstellungen</h3>
+                    <p>Fragenanzahl, Zeit, Darstellung</p>
+                </a>
+                <a href="#" class="card" data-action="training">
+                    <h3>Training</h3>
+                    <p>Ohne Zeitlimit, ohne Ranglistenpunkte</p>
+                </a>
+            </div>
+
+            <section class="badges" aria-label="Abzeichen">
+                <span class="badges-label">Zuletzt erhaltene Abzeichen:</span>
+                <ul class="badge-list" id="erhaltene-abzeichen">
+                    <li class="badge">5er-Serie</li>
+                    <li class="badge">Perfektes Spiel</li>
+                </ul>
+            </section>
         </section>
 
-        <section class="badges" aria-label="Abzeichen">
-            <span class="badges-label">Zuletzt erhaltene Abzeichen:</span>
-            <ul class="badge-list" id="erhaltene-abzeichen">
-                <li class="badge">5er-Serie</li>
-                <li class="badge">Perfektes Spiel</li>
-            </ul>
+        <!-- ANSICHT 2 bis 7: je eine ganze Seite, am Anfang versteckt (hidden).
+             Den Inhalt ersetzt du später durch die echte Seite. -->
+        <section class="view" id="view-einzelquiz" hidden>
+            <h2>Einzelquiz</h2>
+            <p>Diese Seite folgt.</p>
+            <button type="button" data-action="menue">Zurück</button>
+        </section>
+
+        <section class="view" id="view-duell" hidden>
+            <h2>Duell</h2>
+            <p>Diese Seite folgt.</p>
+            <button type="button" data-action="menue">Zurück</button>
+        </section>
+
+        <section class="view" id="view-rangliste" hidden>
+            <h2>Rangliste</h2>
+            <p>Diese Seite folgt.</p>
+            <button type="button" data-action="menue">Zurück</button>
+        </section>
+
+        <section class="view" id="view-profil" hidden>
+            <h2>Profil und Statistik</h2>
+            <p>Diese Seite folgt.</p>
+            <button type="button" data-action="menue">Zurück</button>
+        </section>
+
+        <section class="view" id="view-einstellungen" hidden>
+            <h2>Einstellungen</h2>
+            <p>Diese Seite folgt.</p>
+            <button type="button" data-action="menue">Zurück</button>
+        </section>
+
+        <section class="view" id="view-training" hidden>
+            <h2>Training</h2>
+            <p>Diese Seite folgt.</p>
+            <button type="button" data-action="menue">Zurück</button>
         </section>
     </main>
 
-    <!-- Nur renderer.js gehört in die HTML-Datei. main.js und preload.js werden von Electron selbst geladen. -->
     <script src="renderer.js"></script>
 </body>
 </html>

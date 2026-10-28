@@ -160,6 +160,10 @@ button, input, select, textarea {
     list-style: none;
 }
 
+.view[hidden] {
+    display: none;
+}
+
 /* ---------- Kleinere Fenster ---------- */
 @media (max-width: 860px) {
     .cards {
