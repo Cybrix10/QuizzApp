@@ -4,7 +4,7 @@ npm install better-sqlite3@12.11.1
 npm install --save-dev electron@42 @electron/rebuild
 npx electron-rebuild -f -w better-sqlite3
 
-git pull // Ändeerung holen
+git pull // Änderung holen
 git status // Statusänderungen
 git add . // Änderungen
 git commit (-m) // kurze Beschreibung was geändert wurde
