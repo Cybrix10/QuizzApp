@@ -1,11 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autorentool</title>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'">
+    <title>bib Autorentool</title>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-    
+    <header class="header">
+        <h1 class="brand">bib Autorentool</h1>
+        <span class="header-rolle">Redaktion</span>
+    </header>
+
+    <main class="autor">
+    <!-- Linke Spalte: Fragen suchen und auswählen -->
+    <div class="panel">
+        <input type="search" class="feld" id="suche" placeholder="Fragen durchsuchen">
+            <div class="filter-zeile">
+                <select class="feld" id="filter-kategorie">
+                    <option value="">Alle Kategorien</option>
+                    <option>Computer</option>
+                    <option>Astronomie</option>
+                    <option>Chemie</option>
+                </select>
+                <select class="feld" id="filter-stufe">
+                    <option value="">Alle Stufen</option>
+                    <option>Leicht</option>
+                    <option>Mittel</option>
+                    <option>Schwer</option>
+                </select>   
+            </div>
+
+            <label class="checkbox">
+                <input type="checkbox" id="nur-maengel">
+                Nur aktive Fragen anzeigen
+            </label>
+
+                        <div class="tabelle-box">
+                <table class="fragen-tabelle">
+                    <thead>
+                        <tr>
+                            <th>Frage</th>
+                            <th>Kategorie</th>
+                        </tr>
+                    </thead>
+                    <!-- Beispieldaten, später füllt renderer.js diese Zeilen -->
+                    <tbody id="fragen-liste">
+                        <tr class="aktiv">
+                            <td>Welcher SQL-Befehl liest Daten aus einer Tabelle?</td>
+                            <td>Computer</td>
+                        </tr>
+                        <tr>
+                            <td>Was bedeutet die Abkürzung DDL?</td>
+                            <td>Computer</td>
+                        </tr>
+                        <tr>
+                            <td>Welcher Planet hat die größte Bahnneigung?</td>
+                            <td>Astronomie</td>
+                        </tr>
+                        <tr>
+                            <td><span class="warnung">!!!</span> Wie viele Geräte passen an einen USB-Anschluss?</td>
+                            <td>Computer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+                <div class="aktionen">
+                <button type="button" class="btn btn-primaer" id="btn-neue-frage">+ Neue Frage</button>
+                <button type="button" class="btn btn-sekundaer" id="btn-kategorien">Kategorien verwalten</button>
+            </div>
+
+
+                
+
+    </div>
+    <!-- Rechte Spalte: ausgewählte Frage bearbeiten -->
+    <div class="panel">
+        <form class="formular" id="frage-formular">
+            <div>
+                <label class="feld-titel" for="fragetext">Fragetext</label>
+               <input type="text" class="feld" id="fragetext"
+                     value="Welcher SQL-Befehl liest Daten aus einer Tabelle?">
+            </div>
+
+            <div class="dreier">
+            <div>
+                <label class="feld-titel" for="kategorie">Kategorie</label>
+                <select class="feld" id="kategorie">
+                    <option>Computer</option>
+                    <option>Astronomie</option>
+                    <option>Chemie</option>
+                </select>
+            </div>
+            <div>
+                <label class="feld-titel" for="schwierigkeit">Schwierigkeit</label>
+                <select class="feld" id="schwierigkeit">
+                    <option>Leicht</option>
+                    <option>Mittelschwierig</option>
+                    <option>Schwierig</option>
+                </select>
+            </div>
+            <div>
+                <span class="feld-titel">Bild oder Ton</span>
+                <!-- Klick auf das Feld öffnet die Dateiauswahl -->
+                <label class="feld datei-feld">
+                    <input type="file" id="medium" hidden>
+                    <span id="medium-name">keine Datei</span>
+                </label>
+            </div>      
+        </div>
+        
+                 <div class="antworten-block">
+                    <span class="feld-titel">Antworten</span>
+                    <!-- Alle Radio-Buttons heißen "richtig", deshalb ist immer nur einer ausgewählt -->
+                    <div class="antworten" id="antworten">
+                        <div class="antwort">
+                            <input type="text" class="feld" value="SELECT">
+                            <label class="richtig-wahl"><input type="radio" name="richtig" checked> richtig</label>
+                            <button type="button" class="entfernen">✕</button>
+                        </div>
+                        <div class="antwort">
+                            <input type="text" class="feld" value="INSERT">
+                            <label class="richtig-wahl"><input type="radio" name="richtig"> richtig</label>
+                            <button type="button" class="entfernen">✕</button>
+                        </div>
+                        <div class="antwort">
+                            <input type="text" class="feld" value="UPDATE">
+                            <label class="richtig-wahl"><input type="radio" name="richtig"> richtig</label>
+                            <button type="button" class="entfernen">✕</button>
+                        </div>
+                        <div class="antwort">
+                            <input type="text" class="feld" value="DELETE">
+                            <label class="richtig-wahl"><input type="radio" name="richtig"> richtig</label>
+                            <button type="button" class="entfernen">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="formular-fuss">
+                    <p class="status" id="status">✓ Vollständig (1 richtig, 3 falsch)</p>
+                    <button type="button" class="btn btn-sekundaer" id="btn-antwort">+ Antwort</button>
+                    <button type="button" class="btn btn-sekundaer" id="btn-loeschen">Löschen</button>
+                    <button type="button" class="btn btn-primaer" id="btn-speichern">Speichern</button>
+                </div>
+        </form>
+
+                <label class="feld-titel" for="aktiv">Aktiv</label>
+    </div>
+    </main>
 </body>
 </html>
