@@ -80,7 +80,24 @@
 
         <section class="view" id="view-rangliste" hidden>
             <h2>Rangliste</h2>
-            <p>Diese Seite folgt.</p>
+            <div>
+                <button type=""button data-action="allespieler">Alle Spieler</button>
+                <button type=""button data-action="duellkönige">Duellkönige</button>
+            </div>
+            <div class="card" id="liste">
+                <table class="highscore-tabelle">
+                    <thead>
+                        <tr>
+                            <th>Platz</th>
+                            <th>Spielername</th>
+                            <th>Punkte</th>
+                        </tr>
+                    </thead>
+                    <tbody id="highscore-liste">
+                        <!-- Hier werden die SQLite-Daten gleich per JS eingefügt -->
+                    </tbody>
+                </table>
+            </div>
             <button type="button" data-action="menue">Zurück</button>
         </section>
 
