@@ -12,6 +12,12 @@
     --card-border: #e5ddd3;
     --badge-bg: #f5dada;
     --radius: 14px;
+        /* neue zusätzliche Farben */
+    --radius: 14px;
+    --field-border: #cfc5ba; /* Rahmen der Eingabefelder */
+    --ok: #2e7d32;           /* Grün für "richtig" und "vollständig" */
+    --warn: #b26a00;         /* Orange für das Warndreieck */
+
 }
 
 /* ---------- Grundlagen ---------- */
@@ -184,5 +190,240 @@ button, input, select, textarea {
 @media (prefers-reduced-motion: reduce) {
     .card {
         transition: none;
+    }
+}
+
+/* Autorentool (Autorentool.html) */
+/* Kopfleiste: Text rechts */
+.header-rolle {
+    font-size: 0.85rem;
+}
+
+.autor {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 16px;
+    padding: 20px;
+    height: calc(100vh - 58px); /* Fensterhöhe minus Kopfleiste */
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0; /* ohne diese Zeile kann der Inhalt nicht scrollen */
+    padding: 14px;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+}
+
+/* Eingabefelder und Auswahllisten */
+.feld {
+    width: 100%;
+    padding: 8px 10px;
+    background: #fff;
+    border: 1px solid var(--field-border);
+    border-radius: 8px;
+    color: var(--ink);
+    font-size: 0.9rem;
+}
+
+.filter-zeile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+/* Fragentabellen */
+.tabelle-box {
+    flex: 1;          /* nimmt den freien Platz in der Spalte ein */
+    overflow-y: auto; /* bei vielen Fragen scrollt nur die Tabelle */
+}
+
+.fragen-tabelle {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+.fragen-tabelle th,
+.fragen-tabelle td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--card-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.fragen-tabelle th {
+    color: var(--muted);
+}
+
+.fragen-tabelle tr.aktiv {
+    background: var(--badge-bg);
+}
+
+.warnung {
+    color: var(--warn);
+}
+
+/* Buttons */
+.aktionen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.btn {
+    padding: 7px 12px;
+    border: 1px solid var(--bordeaux);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primaer {
+    background: var(--bordeaux);
+    color: #fff;
+}
+
+.btn-sekundaer {
+    background: #fff;
+    color: var(--bordeaux);
+}
+
+/* Formular rechts */
+.formular {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    height: 100%;
+    min-height: 0;
+}
+
+.feld-titel {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.dreier {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.datei-feld {
+    display: block;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+/* Antworten */
+.antworten-block {
+    display: flex;
+    flex-direction: column;
+    flex: 1;        /* nimmt den freien Platz zwischen Kopf und Fußzeile ein */
+    min-height: 0;
+}
+
+.antworten {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto; /* bei vielen Antworten scrollt nur diese Liste */
+}
+
+.antwort {
+    display: grid;
+    grid-template-columns: 1fr 80px 28px; /* Textfeld, richtig, Kreuz */
+    align-items: center;
+    gap: 8px;
+}
+
+.richtig-wahl {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.richtig-wahl input {
+    accent-color: var(--ok);
+}
+
+/* Die gewählte Antwort wird grün und fett */
+.richtig-wahl:has(input:checked) {
+    color: var(--ok);
+    font-weight: 600;
+}
+
+.entfernen {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Fußzeile im Formular */
+.formular-fuss {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status {
+    flex: 1;
+    font-size: 0.78rem;
+    color: var(--ok);
+}
+
+/* Rückmeldung bei Maus und Tastatur */
+.btn-primaer:hover {
+    background: #5e0000;
+}
+
+.btn-sekundaer:hover {
+    background: var(--badge-bg);
+}
+
+.fragen-tabelle tbody tr {
+    cursor: pointer;
+}
+
+.fragen-tabelle tbody tr:hover {
+    background: #faf2ee;
+}
+
+.entfernen:hover {
+    color: var(--bordeaux);
+}
+
+.feld:focus {
+    outline: none;
+    border-color: var(--bordeaux);
+}
+
+/* Schmale Fenster: Spalten untereinander */
+@media (max-width: 760px) {
+    .autor {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .dreier {
+        grid-template-columns: 1fr;
     }
 }
