@@ -16,3 +16,13 @@ const {
    app.whenReady().then(() => {
     createWindow();
    })
+
+// Datenbank verbindung herstellen
+const database = require("better-sqlite3");
+const db = new Database('QuizzApp.db');
+
+ipcMain.handle('Liste:getAll', () => {
+    return db.prepare(`SELECT q.text, c.category_name AS categoryname
+        FROM question q
+        LEFT JOIN category c ON q.category = c.category_id;`)
+});
