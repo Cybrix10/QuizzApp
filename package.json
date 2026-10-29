@@ -1,11 +1,15 @@
 {
-    "name" : "QuizzApp",
-    "version" : "1.0.0",
-    "main" : "main.js",
+    "name": "QuizzApp",
+    "version": "1.0.0",
+    "main": "main.js",
     "scripts": {
-        "start" : "electron ."
+        "start": "electron ."
     },
     "devDependencies": {
-        "electron" : "^37.0.0"
+        "@electron/rebuild": "^4.2.1",
+        "electron": "^42.11.18"
+    },
+    "dependencies": {
+        "better-sqlite3": "^12.11.1"
     }
 }
